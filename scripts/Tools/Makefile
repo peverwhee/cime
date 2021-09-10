@@ -219,25 +219,6 @@ ifeq ($(strip $(USE_PETSC)), TRUE)
   include $(PETSC_PATH)/lib/petsc/conf/variables
 endif
 
-# Set MOAB info if it is being used
-ifeq ($(strip $(USE_MOAB)), TRUE)
-  ifdef MOAB_PATH
-    CPPDEFS += -DHAVE_MOAB
-    ifndef INC_MOAB
-      INC_MOAB:=$(MOAB_PATH)/include
-    endif
-    ifndef LIB_MOAB
-      LIB_MOAB:=$(MOAB_PATH)/lib
-    endif
-  else
-    $(error MOAB_PATH must be defined when USE_MOAB is TRUE)
-  endif
-
-  # get the "IMESH_LIBS" list as an env var
-  include $(LIB_MOAB)/iMesh-Defs.inc
-
-endif
-
 # Set HAVE_SLASHPROC on LINUX systems which are not bluegene or Darwin (OSx)
 
 ifeq ($(findstring -DLINUX,$(CPPDEFS)),-DLINUX)
@@ -588,11 +569,6 @@ endif
 # Add PETSc libraries
 ifeq ($(strip $(USE_PETSC)), TRUE)
   SLIBS += ${PETSC_LIB}
-endif
-
-# Add MOAB libraries.  These are defined in the MOAB_LINK_LIBS env var that was included above
-ifeq ($(strip $(USE_MOAB)), TRUE)
-  SLIBS += $(IMESH_LIBS)
 endif
 
 # Remove arch flag if it exists
