@@ -149,7 +149,7 @@ class EnvMachSpecific(EnvBase):
         # setup script if it exists.
         init_path = self.get_module_system_init_path("sh")
         if init_path:
-            source_cmd = "source {} && ".format(init_path)
+            source_cmd = ". {} && ".format(init_path)
         else:
             source_cmd = ""
 
