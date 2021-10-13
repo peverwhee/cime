@@ -320,7 +320,7 @@
       <grid name="lnd">TL319</grid>
       <grid name="ocnice">tx0.66v1</grid>
       <grid name="rof">JRA025</grid>
-      <grid name="wav">tx0.66v1</grid>
+      <grid name="wav">wtx0.66v1</grid>
     </model_grid>
 
     <model_grid alias="TL319_t12" not_compset="_CAM">
@@ -1927,6 +1927,12 @@
       <mesh driver="nuopc">$DIN_LOC_ROOT/share/meshes/ww3a_120222_ESMFmesh.nc</mesh>
       <desc>WW3 90 x 50 global grid</desc>
       <support>For testing of the WAV model</support>
+    </domain>
+    <domain name="wtx0.66v1">
+      <nx>540</nx> <ny>458</ny>
+      <mesh driver="nuopc">$DIN_LOC_ROOT/share/meshes/wtx0.66v1_210917_ESMFmesh.nc</mesh>
+      <desc>wtx0.66v1 is tripole v1 0.66-deg WW3 grid based on MOM6 grid</desc>
+      <support>MOM6 tx0.66v1-based WW3 grid where cells above 88N are masked</support>
     </domain>
 
   </domains>
