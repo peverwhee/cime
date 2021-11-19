@@ -33,6 +33,16 @@ micro_pumas_data.o \
 micro_pumas_utils.o \
 wv_sat_methods.o
 
+RRTMGP_OBJS=\
+mo_rte_util_array.o \
+mo_rte_sw.o \
+mo_rte_lw.o \
+mo_cloud_optics.o \
+mo_gas_optics_rrtmgp.o \
+mo_gas_concentrations.o \
+mo_fluxes_broadband_kernels.o \
+mo_fluxes_byband_kernels.o \
+mo_rrtmgp_util_reorder_kernels.o
 
 ifeq ($(DEBUG),FALSE)
   $(PERFOBJS): %.o: %.F90
@@ -49,3 +59,6 @@ ifeq ($(DEBUG),FALSE)
 	  $(FC) -c $(INCLDIR) $(INCS) $(FFLAGS) $(FREEFLAGS) -O3 -xCORE-AVX2 -no-fma -ftz -no-prec-sqrt -qoverride-limits -no-inline-max-total-size -inline-factor=200 -qopt-report=5 $<
 
 endif
+
+$(RRTMGP_OBJS): %.o: %.F90
+	$(FC) -c $(INCLDIR) $(INCS) $(FFLAGS) $(FREEFLAGS) -fno-openmp $<
